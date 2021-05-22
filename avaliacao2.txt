@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+//constante para definir a quantidade máxima de caracteres
+#define LETRAS_MAX 100
+
+int alteraLetras(char *entrada, char *saida, char antiga, char nova, int tamanho = LETRAS_MAX)
+{
+    // para controlar o loop
+    int j;
+    // armazena a quantidade de letras alteradas
+    int quantidade = 0;
+
+    // loop em cada letra da palavra
+    for (j = 0; j < tamanho; j++)
+    {
+        //caso encontre um espaço ou o final da entrada do usário, interrompe o loop
+        if (entrada[j] == ' ' or entrada[j] == '\0')
+        {
+            break;
+        }
+        else if (entrada[j] == antiga) // verifica se a letra deve se trocada
+        {
+            saida[j] = nova; // insere a letra nova
+            quantidade++;    // incrementa o contador de letras alteradas
+        }
+        else
+        {
+            saida[j] = entrada[j]; // se não for necessário trocar, insere a mesma letra do origem
+        }
+    }
+
+    // insere o carácter de terminação nula
+    saida[j] = '\0';
+
+    // retorna a quantidade de letras alteradas
+    return quantidade;
+}
+
+int main()
+{
+    //array para guardar a palavra enviada pelo usuário
+    char entrada[LETRAS_MAX];
+    //array para guardar a palavra enviada pelo usuário
+    char saida[LETRAS_MAX];
+    //variável com carácter a ser substituído
+    char antiga;
+    //variável com carácter substituto
+    char nova;
+    // variável para armazenar a quantidade de caracteres substituídos
+    int quantidade = 0;
+    // obtém a palavra de entrada do usuário
+    cin.getline(entrada, LETRAS_MAX + 1); //+1 é para considerar o carácter de terminação nulo '\0''
+    // obtém do usuário a letra a ser substituída
+    cin >> antiga;
+    // obtém do usuário a letra substituta
+    cin >> nova;
+    // chama a função que altera a letras
+    // a função retorna a quantidade de letras alteradas
+    quantidade = alteraLetras(entrada, saida, antiga, nova);
+    // imprime na tela o resultado
+    cout << saida << endl;
+    //imprime na tela a palavra original
+    cout << entrada << endl;
+    // imprime na tela a quantidade de letras alteradas
+    cout << quantidade << endl;
+
+    return 0;
+}
